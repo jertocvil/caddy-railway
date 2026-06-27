@@ -5,5 +5,15 @@
 # Remember, Railway terminates TLS before it gets to Caddy.
 :8080
 
-root /www
-file_server
+handle /api/* {
+	reverse_proxy {$API_PRIVATE_DOMAIN}:{$API_PORT}
+}
+
+handle /app/* {
+	reverse_proxy {$APP_PRIVATE_DOMAIN}:{$APP_PORT}
+}
+
+handle {
+	root * /www
+	file_server
+}
