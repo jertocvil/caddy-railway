@@ -9,7 +9,8 @@ handle /api/* {
 	reverse_proxy {$API_PRIVATE_DOMAIN}:{$API_PORT}
 }
 
-handle /app /app/* {
+@app path /app /app/*
+handle @app {
 	basic_auth {
 		{$APP_AUTH_USER} {$APP_AUTH_HASH}
 	}
