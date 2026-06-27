@@ -10,6 +10,9 @@ handle /api/* {
 }
 
 handle /app/* {
+	basic_auth {
+		{$APP_AUTH_USER} {$APP_AUTH_HASH}
+	}
 	reverse_proxy {$APP_PRIVATE_DOMAIN}:{$APP_PORT}
 }
 
